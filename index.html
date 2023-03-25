@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <container class="container-Center">
+        <h1>To-do list</h1>
+        <div class="input-container">
+            <input type="text" id="input" placeholder="Enter your task">
+            <button id="add" onclick="addItem()">Add</button>
+            <button id="get" onclick="getItem()">Get</button>
+            <button id="remove" onclick="removeItem()">Remove (devtool)</button>
+            <select>
+                <option value="1">Måndag</option>
+                <option value="2">Tisdag</option>
+                <option value="3">Onsdag</option>
+                <option value="4">Torsdag</option>
+                <option value="5">Fredag</option>
+                <option value="6">Lördag</option>
+                <option value="7">Söndag</option>
+            </select>
+        </div>
+        <div class="list-container">
+            
+            <ul id="list"></ul>
+        </div>
+
+        <div class="toDoList">
+            <h2 id="printToDo"></h2>
+        </div> 
+        
+           
+    </container>
+    <script src="./script.js"></script>
+</body>
+</html>
