@@ -1,5 +1,7 @@
 const toDoList = document.getElementById("toDoList");
 const printToDo = document.getElementById("printToDo");
+const prioSelect = document.getElementById("prioSel");
+const daySelect = document.getElementById("daySel");
 
 if (localStorage.getItem("toDo") === null) {
     console.log("Den var null!");
@@ -8,6 +10,19 @@ if (localStorage.getItem("toDo") === null) {
     console.log("Den var inte null!");
     displayToDoItems();
 }
+
+// Eventlistener för att ändra prioSelectValue när prioSelect ändras
+prioSelect.addEventListener("change", function() {
+let prioSelectValue = prioSelect.value;
+console.log("prio: "+ prioSelectValue);
+});
+
+// Eventlistener för att ändra daySelectValue när daySelect ändras
+daySelect.addEventListener("change", function() {
+let daySelectValue = daySelect.value;
+console.log("day: " + daySelectValue);
+});
+
 
 // Funktion för att skapa och lagra en tom toDoArray i localStorage
 function initializeEmptyToDoArray() {
@@ -24,10 +39,12 @@ function addItem() {
     let textInputValue = textInput.value;
     const newTodo = {
         text: textInputValue,
-        day: date
+        day: date,
+        priority: prioSelect.value
     };
-
-    saveToDoItem(textInputValue);
+    let newToDoJSON = JSON.stringify(newTodo);
+    saveToDoItem(newToDoJSON);
+    
 }
 
 // Funktion för att hämta toDoArray från localStorage
@@ -38,11 +55,12 @@ function getToDoArray() {
     return toDoArray; // Returnerar toDoArray
 }
 
-// Funktion för att visa todo-items
+// Funktion för att visa alla todos i arrayn under page load
 function displayToDoItems() {
     let toDoArray = getToDoArray(); // Sparar returvärde från getToDoArray() i variabeln toDoArray
     for (let i = 0; i < toDoArray.length; i++) {
-        printToDo.innerHTML += `<li>${toDoArray[i]}</li>`;
+        let parseToDo = JSON.parse(toDoArray[i]);
+        printToDo.innerHTML += `<li>${parseToDo.text}</li>`;
     }
 }
 
@@ -52,11 +70,16 @@ function saveToDoItem(textInputValue) {
     toDoArray.push(textInputValue); // Lägger till textInputValue i toDoArray
     let toDoArrayStr = JSON.stringify(toDoArray); // Gör om toDoArray till en sträng
     localStorage.setItem("toDo", toDoArrayStr); // Sparar toDoArrayStr i localStorage
-    printToDo.innerHTML += `<li>${textInputValue}</li>`;
+    let parseToDo = JSON.parse(toDoArray[toDoArray.length - 1]);
+    printToDo.innerHTML += `<li>${parseToDo.text}</li>`;
 }
 
 // Funktion för att ta bort todo från arrayn
 function removeItem() {
     localStorage.clear("toDo");
     location.reload();
+}
+
+function sortArray() {
+   
 }
