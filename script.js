@@ -6,6 +6,7 @@ const today = new Date(); // Skapar ett Date-objekt
 const date = today.getUTCDay(); // Hämtar dagens datum
 
 
+
 // Kollar om toDo finns i localStorage, om inte så skapas en tom array
 // Annars så visas arrayn på skärmen
 if (localStorage.getItem("toDo") === null) {
@@ -95,3 +96,4 @@ function sortArray() {
 
     }
 }
+
