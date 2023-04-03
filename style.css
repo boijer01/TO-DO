@@ -15,3 +15,20 @@ body {
   text-align: center;
   margin-top: 0;
 }
+
+.removeButton {
+  background-color: rgb(56, 56, 56);
+  color: white;
+  font-size: large;
+  border-radius: 10%;
+  text-decoration: none;
+  transition: 300ms;
+}
+.removeButton:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(56, 56, 56);
+  font-size: large;
+  border-radius: 10%;
+  text-decoration: none;
+ 
+}

@@ -74,6 +74,7 @@ function sortArray() {
 
                 // Skapar en knapp för att ta bort todo
                 let removeButton = document.createElement("button");
+                removeButton.className = "removeButton";
                 removeButton.innerHTML = "Ta bort";
                 removeButton.setAttribute("id", "removeButton");
                 removeButton.setAttribute("onclick", `removeItem(${displayedItems.length - 1})`);
