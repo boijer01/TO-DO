@@ -64,10 +64,11 @@ function sortArray() {
 
     for (let n = 1; n < 4; n++) {
         printToDo.innerHTML += "PRIORITET: " + n + "<br> ";
+        printToDo.className = "printToDo";
         for (let i = 0; i < toDoArray.length; i++) {
             let parseToDo = JSON.parse(toDoArray[i]);
             if (parseToDo.priority == n && parseToDo.day == date) {
-                printToDo.innerHTML += `<li>${parseToDo.text}</li>`;
+               
 
                 // Lägger till indexet för det visade objektet i displayedItems
                 displayedItems.push(i);
@@ -79,7 +80,10 @@ function sortArray() {
                 removeButton.setAttribute("id", "removeButton");
                 removeButton.setAttribute("onclick", `removeItem(${displayedItems.length - 1})`);
                 removeButton.setAttribute("data-index", i);
-                printToDo.appendChild(removeButton);
+                let listItem = document.createElement("li");
+                listItem.innerHTML = parseToDo.text;
+                listItem.appendChild(removeButton);
+                printToDo.appendChild(listItem);
             }
         }
     }
