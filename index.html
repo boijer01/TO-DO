@@ -9,41 +9,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <container class="container-Center">
-        <h1>To-do list</h1>
-        <div class="input-container">
-            <input type="text" id="input" placeholder="Enter your task">
-            <button id="add" onclick="addItem()">Add</button>
-            <button id="get" onclick="getItem()">Get</button>
-            <button id="remove" onclick="removeItem()">Remove (devtool)</button>
-            <button id="remove" onclick="sortArray()">Sort (devtol)</button>
-            <select id="daySel">
-                <option value="1">Måndag</option>
-                <option value="2">Tisdag</option>
-                <option value="3">Onsdag</option>
-                <option value="4">Torsdag</option>
-                <option value="5">Fredag</option>
-                <option value="6">Lördag</option>
-                <option value="0">Söndag</option>
-            </select>
-            <select id="prioSel">
-                <option value="1">Prioritet 1</option>
-                <option value="2">Prioritet 2</option>
-                <option value="3">Prioritet 3</option>
-             
-            </select>
+    <div class="container d-flex justify-content-center">
+        <div class="container-Center text-center">
+            <h1 id="title">To-do list</h1>
+            <div class="input-container">
+                <div class="input-group mb-3">
+                    <input type="text" id="input" class="form-control" placeholder="Enter your task">
+                    <div class="input-group-append">
+                        <button id="add" class="btn btn-primary" onclick="addItem()">Add</button>
+                    </div>
+                </div>
+                <div class="btn-group mb-3">
+                    <button id="get" class="btn btn-secondary" onclick="getItem()">Get</button>
+                    <button id="remove" class="btn btn-secondary" onclick="removeItem()">Remove (devtool)</button>
+                    <button id="remove" class="btn btn-secondary" onclick="sortArray()">Sort (devtool)</button>
+                </div>
+                <div class="form-group mb-3">
+                    <select id="daySel" class="form-control custom-select">
+                        <option value="1">Måndag</option>
+                        <option value="2">Tisdag</option>
+                        <option value="3">Onsdag</option>
+                        <option value="4">Torsdag</option>
+                        <option value="5">Fredag</option>
+                        <option value="6">Lördag</option>
+                        <option value="0">Söndag</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <select id="prioSel" class="form-control custom-select">
+                        <option value="1">Prioritet 1</option>
+                        <option value="2">Prioritet 2</option>
+                        <option value="3">Prioritet 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="list-container">
+                <ul id="list" class="list-group"></ul>
+            </div>
+            <div class="toDoList">
+                <h2 id="printToDo"></h2>
+            </div>
         </div>
-        <div class="list-container">
-            
-            <ul id="list"></ul>
-        </div>
-
-        <div class="toDoList">
-            <h2 id="printToDo"></h2>
-        </div> 
-        
-           
-    </container>
-    <script src="./script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
