@@ -4,7 +4,7 @@ const prioSelect = document.getElementById("prioSel");
 const daySelect = document.getElementById("daySel");
 const today = new Date(); // Skapar ett Date-objekt
 const date = today.getUTCDay(); // Hämtar dagens datum
-
+let displayedItems = [];
 
 
 // Kollar om toDo finns i localStorage, om inte så skapas en tom array
@@ -84,16 +84,33 @@ function sortArray() {
     let today = date;
     console.log("Dagens datum: " + today);
 
-    let toDoArray = getToDoArray(); // Sparar returvärde från getToDoArray() i variabeln toDoArray
+    let toDoArray = getToDoArray();
     for (let n = 1; n < 4; n++) {
         printToDo.innerHTML += "PRIORITET: " + n + "<br> ";
         for (let i = 0; i < toDoArray.length; i++) {
             let parseToDo = JSON.parse(toDoArray[i]);
             if (parseToDo.priority == n && parseToDo.day == today) {
                 printToDo.innerHTML += `<li>${parseToDo.text}</li>`;
+
+                // Lägger till indexet för det visade objektet i displayedItems
+                displayedItems.push(i);
+
+                // Skapar en knapp för att ta bort todo
+                let removeButton = document.createElement("button");
+                removeButton.innerHTML = "Ta bort";
+                removeButton.setAttribute("id", "removeButton");
+                removeButton.setAttribute("onclick", `removeItem(${displayedItems.length - 1})`); // Skickar indexet som en parameter
+                removeButton.setAttribute("data-index", i); // Lägger till ett unikt data-index för varje knapp
+                printToDo.appendChild(removeButton);
             }
         }
-
     }
 }
 
+function removeItem(displayedIndex) {
+    let toDoArray = getToDoArray();
+    let itemIndex = displayedItems[displayedIndex];
+    toDoArray.splice(itemIndex, 1);
+    localStorage.setItem("toDo", JSON.stringify(toDoArray));
+    sortArray();
+}
