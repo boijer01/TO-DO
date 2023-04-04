@@ -10,11 +10,14 @@ const date = today.getUTCDay(); // Hämtar dagens datum
 let displayedItems = []; // Array för att lagra index för visade objekt
 
 
-if(!localStorage.getItem("scoreStorage")) {
- localStorage.setItem("scoreStored", 0); 
+let score = parseInt(localStorage.getItem('scoreStorage'));
+
+// Om score inte finns i localStorage, sätt det till 0
+if (isNaN(score)) {
+  score = 0;
+  localStorage.setItem('scoreStorage', score);
 }
 
-score = parseInt(localStorage.getItem("scoreStorage"));
 
 scoreOutput();
 
