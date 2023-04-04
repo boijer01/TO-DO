@@ -3,10 +3,20 @@ const toDoList = document.getElementById("toDoList");
 const printToDo = document.getElementById("printToDo");
 const prioSelect = document.getElementById("prioSel");
 const daySelect = document.getElementById("daySel");
+const scoreElement = document.getElementById("score");
 
 const today = new Date(); // Skapar ett Date-objekt
 const date = today.getUTCDay(); // Hämtar dagens datum
 let displayedItems = []; // Array för att lagra index för visade objekt
+
+
+if(!localStorage.getItem("scoreStorage")) {
+ localStorage.setItem("scoreStored", 0); 
+}
+
+score = parseInt(localStorage.getItem("scoreStorage"));
+
+scoreOutput();
 
 // Kontrollerar om "toDo" finns i localStorage
 // Om inte, skapar en tom toDoArray och lagrar den i localStorage
@@ -92,7 +102,32 @@ function sortArray() {
 function removeItem(displayedIndex) {
     let toDoArray = getToDoArray();
     let itemIndex = displayedItems[displayedIndex];
+    let removedToDo = JSON.parse(toDoArray[itemIndex]);
+    let removedPrio = removedToDo.priority;
+    console.log("raderad prioritet " + removedPrio);
     toDoArray.splice(itemIndex, 1);
     localStorage.setItem("toDo", JSON.stringify(toDoArray));
     sortArray();
+
+    
+    if(removedPrio == 1){
+        score += 5;
+        scoreOutput();
+    }
+    if(removedPrio == 2) {
+        score += 3;
+        scoreOutput();
+    }
+    if(removedPrio == 3) {
+        score += 2;
+        scoreOutput();
+    }
+    
 }
+
+
+function scoreOutput() {
+   localStorage.setItem("scoreTotal", score);
+    scoreElement.innerHTML = score;
+}
+
