@@ -1,7 +1,7 @@
 // Hämtar element från DOM
 const toDoList = document.getElementById("toDoList");
 const printToDo = document.getElementById("printToDo");
-const prioSelect = document.getElementById("prioSel");
+const prioritySelect = document.getElementById("prioSel");
 const daySelect = document.getElementById("daySel");
 const scoreElement = document.getElementById("score");
 
@@ -9,8 +9,9 @@ const today = new Date(); // Skapar ett Date-objekt
 const date = today.getUTCDay(); // Hämtar dagens datum
 let displayedItems = []; // Array för att lagra index för visade objekt
 
+daySelect.value = date; //Selection för dagen blir nuvarande dag
 
-let score = parseInt(localStorage.getItem('scoreStorage'));
+let score = parseInt(localStorage.getItem('scoreStorage')); //Hämtar från localstorage
 
 // Om score inte finns i localStorage, sätt det till 0
 if (isNaN(score)) {
@@ -21,9 +22,10 @@ if (isNaN(score)) {
 
 scoreOutput();
 
-// Kontrollerar om "toDo" finns i localStorage
-// Om inte, skapar en tom toDoArray och lagrar den i localStorage
-// Annars, sorterar och visar todos på skärmen
+/*  Kontrollerar om "toDo" finns i localStorage
+    Om inte, skapar en tom toDoArray och lagrar den i localStorage
+    Annars, sorterar och visar todos på skärmen
+*/
 if (localStorage.getItem("toDo") === null) {
     initializeEmptyToDoArray();
 } else {
@@ -31,8 +33,8 @@ if (localStorage.getItem("toDo") === null) {
 }
 
 // Eventlisteners för att uppdatera värden när prioSelect och daySelect ändras
-prioSelect.addEventListener("change", function () {
-    console.log("prio: " + prioSelect.value);
+prioritySelect.addEventListener("change", function () {
+    console.log("prio: " + prioritySelect.value);
 });
 daySelect.addEventListener("change", function () {
     console.log("day: " + daySelect.value);
@@ -51,7 +53,7 @@ function addItem() {
     const newTodo = {
         text: textInputValue,
         day: daySelect.value,
-        priority: prioSelect.value
+        priority: prioritySelect.value
     };
     saveToDoItem(JSON.stringify(newTodo));
 }
@@ -102,6 +104,7 @@ function sortArray() {
     }
 }
 
+//Raderar itemsen 
 function removeItem(displayedIndex) {
     let toDoArray = getToDoArray();
     let itemIndex = displayedItems[displayedIndex];
@@ -112,7 +115,12 @@ function removeItem(displayedIndex) {
     localStorage.setItem("toDo", JSON.stringify(toDoArray));
     sortArray();
 
+    scoreAdd(removedPrio)
     
+}
+
+//Lägger till poäng beroende på vad man raderat. 
+function scoreAdd(removedPrio) {
     if(removedPrio == 1){
         score += 5;
         scoreOutput();
@@ -125,12 +133,12 @@ function removeItem(displayedIndex) {
         score += 2;
         scoreOutput();
     }
-    
 }
 
-
+//Uppdaterar poängen.
 function scoreOutput() {
-   localStorage.setItem("scoreTotal", score);
+   
+    localStorage.setItem('scoreStorage', score);
     scoreElement.innerHTML = score;
 }
 
