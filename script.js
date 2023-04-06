@@ -4,6 +4,8 @@ const printToDo = document.getElementById("printToDo");
 const prioritySelect = document.getElementById("prioSel");
 const daySelect = document.getElementById("daySel");
 const scoreElement = document.getElementById("score");
+const rankElement = document.getElementById("rank");
+let userRank;
 
 const today = new Date(); // Skapar ett Date-objekt
 const date = today.getUTCDay(); // Hämtar dagens datum
@@ -21,6 +23,7 @@ if (isNaN(score)) {
 
 
 scoreOutput();
+updateRank();
 
 /*  Kontrollerar om "toDo" finns i localStorage
     Om inte, skapar en tom toDoArray och lagrar den i localStorage
@@ -140,5 +143,41 @@ function scoreOutput() {
    
     localStorage.setItem('scoreStorage', score);
     scoreElement.innerHTML = score;
+
+    scoreRank();
+}
+
+function scoreRank() {
+    if(score < 75) {
+        userRank = "Tjockis"
+        updateRank();
+    } else if (score <100) {
+        userRank = "Acceptabelt"
+        updateRank();
+    } else if (score <150) {
+        userRank = "Average :/"
+        updateRank();
+    } else if (score <200) {
+        userRank = "Ganska produktiv"
+        updateRank();
+    } else if (score <250) {
+        userRank = "Framtiden ser ljus ut"
+        updateRank();
+    } else if (score <300) {
+        userRank = "Produktiv man!"
+        updateRank();
+    } else if (score <400) {
+        userRank = "Nästa Elon Musk?"
+        updateRank();
+    } else if (score > 499) {
+        userRank = "Elon Musk."
+        updateRank();
+    }
+    
+    
+}
+
+function updateRank() {
+    rankElement.innerHTML = "Rank: " + userRank;
 }
 
