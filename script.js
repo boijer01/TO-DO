@@ -5,7 +5,7 @@ const prioritySelect = document.getElementById("prioSel");
 const daySelect = document.getElementById("daySel");
 const scoreElement = document.getElementById("score");
 const rankElement = document.getElementById("rank");
-let userRank;
+
 
 const today = new Date(); // Skapar ett Date-objekt
 const date = today.getUTCDay(); // Hämtar dagens datum
@@ -20,7 +20,6 @@ if (isNaN(score)) {
   score = 0;
   localStorage.setItem('scoreStorage', score);
 }
-
 
 scoreOutput();
 updateRank();
@@ -86,8 +85,7 @@ function sortArray() {
         for (let i = 0; i < toDoArray.length; i++) {
             let parseToDo = JSON.parse(toDoArray[i]);
             if (parseToDo.priority == n && parseToDo.day == date) {
-               
-
+            
                 // Lägger till indexet för det visade objektet i displayedItems
                 displayedItems.push(i);
 
@@ -148,36 +146,27 @@ function scoreOutput() {
 }
 
 function scoreRank() {
+    let userRank;
     if(score < 75) {
-        userRank = "Tjockis"
-        updateRank();
+        userRank = "Tjockis";
     } else if (score <100) {
-        userRank = "Acceptabelt"
-        updateRank();
+        userRank = "Acceptabelt";
     } else if (score <150) {
-        userRank = "Average :/"
-        updateRank();
+        userRank = "Average :/";
     } else if (score <200) {
-        userRank = "Ganska produktiv"
-        updateRank();
+        userRank = "Ganska produktiv";
     } else if (score <250) {
-        userRank = "Framtiden ser ljus ut"
-        updateRank();
+        userRank = "Framtiden ser ljus ut";
     } else if (score <300) {
-        userRank = "Produktiv man!"
-        updateRank();
+        userRank = "Produktiv man!";
     } else if (score <400) {
-        userRank = "Nästa Elon Musk?"
-        updateRank();
+        userRank = "Nästa Elon Musk?";
     } else if (score > 499) {
-        userRank = "Elon Musk."
-        updateRank();
+        userRank = "Elon Musk.";
     }
-    
-    
+    updateRank(userRank);
 }
-
-function updateRank() {
+function updateRank(userRank) {
     rankElement.innerHTML = "Rank: " + userRank;
 }
 
