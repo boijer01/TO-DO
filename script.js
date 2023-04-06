@@ -22,8 +22,7 @@ if (isNaN(score)) {
 }
 
 scoreOutput();
-updateRank();
-
+scoreRank();
 /*  Kontrollerar om "toDo" finns i localStorage
     Om inte, skapar en tom toDoArray och lagrar den i localStorage
     Annars, sorterar och visar todos på skärmen
